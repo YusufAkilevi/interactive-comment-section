@@ -1,0 +1,27 @@
+<div class="comment-box">
+  <div class="vote">
+    <span><img src="assets/images/icon-plus.svg" alt="Icon plus" /></span>
+    <span>{{ comment.score }}</span>
+    <span><img src="assets/images/icon-minus.svg" alt="Icon minus" /></span>
+  </div>
+  <div>
+    <div class="comment-info">
+      <div class="user">
+        <div class="avatar">
+          <img src="{{ comment.user.image.png }}" alt="User Avatar" />
+        </div>
+        <p class="username">{{ comment.user.username }}</p>
+        <p class="date">{{ comment.createdAt }}</p>
+      </div>
+      <div class="button">
+        <button class="button-reply">
+          <img src="assets/images/icon-reply.svg" alt="Reply Icon" />
+          Reply
+        </button>
+      </div>
+    </div>
+    <p class="comment">
+      {{ comment.content }}
+    </p>
+  </div>
+</div>

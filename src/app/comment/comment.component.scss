@@ -1,0 +1,73 @@
+@import "../../sass/variables";
+
+.comment-box {
+  display: flex;
+  gap: 2rem;
+  background-color: $white;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.vote {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background-color: $very-light-gray;
+  padding: 1rem;
+  border-radius: 8px;
+  align-self: flex-start;
+
+  span {
+    font-size: 1.4rem;
+    color: $moderate-blue;
+    font-weight: $font-500;
+  }
+}
+
+.comment-info {
+  display: flex;
+  justify-content: space-between;
+
+  .user {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+
+    .avatar {
+      width: 2.5rem;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .username {
+      color: $dark-blue;
+      font-size: 1.4rem;
+      font-weight: $font-500;
+    }
+
+    .date {
+      color: $grayish-blue;
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.comment {
+  margin-top: 1rem;
+  color: $grayish-blue;
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+.button-reply {
+  border: none;
+  background-color: $white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $moderate-blue;
+  font-weight: $font-700;
+}
