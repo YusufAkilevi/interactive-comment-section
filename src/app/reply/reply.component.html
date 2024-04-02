@@ -8,7 +8,7 @@
         />
       </svg>
     </button>
-    <span>{{ comment.score }}</span>
+    <span>{{ reply.score }}</span>
     <button>
       <svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
         <path
@@ -22,10 +22,10 @@
     <div class="comment-info">
       <div class="user">
         <div class="avatar">
-          <img src="{{ comment.user.image.png }}" alt="User Avatar" />
+          <img src="{{ reply.user.image.png }}" alt="User Avatar" />
         </div>
-        <p class="username">{{ comment.user.username }}</p>
-        <p class="date">{{ comment.createdAt }}</p>
+        <p class="username">{{ reply.user.username }}</p>
+        <p class="date">{{ reply.createdAt }}</p>
       </div>
       <div class="button">
         <button class="button-reply">
@@ -40,17 +40,7 @@
       </div>
     </div>
     <p class="comment">
-      {{ comment.content }}
+      <span>@{{ reply.replyingTo }} </span>{{ reply.content }}
     </p>
-  </div>
-</div>
-
-<div *ngIf="comment.replies.length > 0" class="reply-box">
-  <div class="v-line"></div>
-  <div class="replies">
-    <app-reply
-      *ngFor="let reply of comment.replies"
-      [reply]="reply"
-    ></app-reply>
   </div>
 </div>

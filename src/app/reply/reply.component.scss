@@ -71,6 +71,11 @@
   color: $grayish-blue;
   font-size: 1.6rem;
   line-height: 1.5;
+
+  span {
+    color: $moderate-blue;
+    font-weight: 500;
+  }
 }
 
 .button-reply {
@@ -89,22 +94,5 @@
 
   &:hover path {
     fill: $light-grayish-blue;
-  }
-}
-
-.reply-box {
-  margin-top: 2rem;
-  display: flex;
-  gap: 3rem;
-
-  .v-line {
-    border-left: 2px solid rgba(0, 0, 0, 0.1);
-    margin-left: 3rem;
-  }
-
-  .replies {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
   }
 }

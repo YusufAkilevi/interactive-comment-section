@@ -10,6 +10,7 @@ export class Reply {
         webp: string;
       };
       username: string;
-    }
+    },
+    public replyingTo: string
   ) {}
 }
