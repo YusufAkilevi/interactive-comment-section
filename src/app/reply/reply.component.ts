@@ -10,7 +10,5 @@ import { Reply } from '../shared/reply.model';
 export class ReplyComponent {
   @Input() reply!: Reply;
 
-  constructor() {
-    console.log(this.reply);
-  }
+  constructor() {}
 }

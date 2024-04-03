@@ -3,7 +3,12 @@
     <img src="{{ currentUser.image.png }}" alt="User Avatar" />
   </div>
   <div class="new-comment-form">
-    <textarea class="comment" placeholder="Add a comment.." rows="4"></textarea>
-    <button>SEND</button>
+    <textarea
+      class="comment"
+      placeholder="Add a comment.."
+      rows="4"
+      #commentInput
+    ></textarea>
+    <button (click)="onSendComment()">SEND</button>
   </div>
 </div>

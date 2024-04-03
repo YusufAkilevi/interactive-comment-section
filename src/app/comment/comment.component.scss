@@ -35,7 +35,9 @@
     }
   }
 }
-
+.comment-info-container {
+  width: 100%;
+}
 .comment-info {
   display: flex;
   justify-content: space-between;
@@ -72,7 +74,12 @@
   font-size: 1.6rem;
   line-height: 1.5;
 }
-
+.you-label {
+  background-color: $moderate-blue;
+  color: $white;
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+}
 .button-reply {
   border: none;
   background-color: $white;

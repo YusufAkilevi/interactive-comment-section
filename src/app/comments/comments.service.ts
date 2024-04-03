@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Comment } from '../shared/comment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,23 @@ export class CommentsService {
         },
         username: 'amyrobson',
       },
-      replies: [],
+      replies: [
+        {
+          id: 5,
+          content:
+            "If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting to jump ahead but lay a solid foundation first.",
+          createdAt: '1 week ago',
+          score: 4,
+          replyingTo: 'maxblagun',
+          user: {
+            image: {
+              png: '../../assets/images/avatars/image-ramsesmiron.png',
+              webp: '../../assets/images/avatars/image-ramsesmiron.webp',
+            },
+            username: 'ramsesmiron',
+          },
+        },
+      ],
     },
     {
       id: 2,
@@ -76,5 +93,28 @@ export class CommentsService {
     username: 'juliusomo',
   };
 
+  count = 4;
+
   constructor() {}
+
+  addComment(newComment: Comment) {
+    this.comments.push(newComment);
+    console.log(this.comments);
+  }
+
+  voteComments(voteType: string, commentId: number) {
+    if (voteType === 'up') {
+      const comment = this.comments.find((comment) => comment.id === commentId);
+      if (comment) {
+        comment.score++;
+      }
+    } else {
+      const comment = this.comments.find((comment) => comment.id === commentId);
+      if (comment) {
+        comment.score--;
+      }
+    }
+
+    this.comments.sort((a: Comment, b: Comment) => b.score - a.score);
+  }
 }
