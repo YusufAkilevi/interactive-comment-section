@@ -80,24 +80,6 @@
   padding: 0.2rem 0.6rem;
   border-radius: 2px;
 }
-.button-reply {
-  border: none;
-  background-color: $white;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: $moderate-blue;
-  font-weight: $font-700;
-
-  &:hover {
-    color: $light-grayish-blue;
-    cursor: pointer;
-  }
-
-  &:hover path {
-    fill: $light-grayish-blue;
-  }
-}
 
 .reply-box {
   margin-top: 2rem;

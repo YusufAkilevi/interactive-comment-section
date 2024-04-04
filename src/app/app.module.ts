@@ -5,18 +5,20 @@ import { AppComponent } from './app.component';
 import { CommentComponent } from './comment/comment.component';
 import { NewCommentComponent } from './new-comment/new-comment.component';
 import { ReplyComponent } from './reply/reply.component';
+import { EditDeleteButtonsComponent } from './comment/edit-delete-buttons/edit-delete-buttons.component';
+import { ReplyButtonComponent } from './comment/reply-button/reply-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CommentComponent,
     NewCommentComponent,
-    ReplyComponent
+    ReplyComponent,
+    EditDeleteButtonsComponent,
+    ReplyButtonComponent,
   ],
-  imports: [
-    BrowserModule
-  ],
+  imports: [BrowserModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

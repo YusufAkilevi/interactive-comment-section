@@ -1,0 +1,42 @@
+@import "../../../sass/variables";
+
+.buttons {
+  display: flex;
+  gap: 2rem;
+
+  button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    background-color: $white;
+    font-weight: $font-700;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .btn-delete {
+    color: $soft-red;
+
+    &:hover {
+      color: $plae-red;
+
+      path {
+        fill: $plae-red;
+      }
+    }
+  }
+  .btn-edit {
+    color: $moderate-blue;
+
+    &:hover {
+      color: $light-grayish-blue;
+
+      path {
+        fill: $light-grayish-blue;
+      }
+    }
+  }
+}

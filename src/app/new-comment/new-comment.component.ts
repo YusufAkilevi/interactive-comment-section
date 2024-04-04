@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { CommentsService } from '../comments/comments.service';
 import { Comment, User } from '../shared/comment.model';
 
@@ -9,6 +9,8 @@ import { Comment, User } from '../shared/comment.model';
 })
 export class NewCommentComponent implements OnInit {
   currentUser!: User;
+
+  @Input() replyingTo = '';
 
   @ViewChild('commentInput', { static: false }) commentInputRef: ElementRef;
 
@@ -30,5 +32,10 @@ export class NewCommentComponent implements OnInit {
       )
     );
     this.commentInputRef.nativeElement.value = '';
+  }
+
+  onSendReply() {
+    console.log('reply');
+    this.replyingTo = '';
   }
 }

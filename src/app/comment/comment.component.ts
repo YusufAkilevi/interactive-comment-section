@@ -13,6 +13,7 @@ export class CommentComponent implements OnInit {
 
   currentUser: User;
   isCurrentUser: boolean;
+  replyingTo: string;
 
   constructor(private commentsService: CommentsService) {}
 
@@ -24,5 +25,10 @@ export class CommentComponent implements OnInit {
 
   onVote(voteType: string) {
     this.commentsService.voteComments(voteType, this.comment.id);
+  }
+
+  onClickReply() {
+    console.log('clicked');
+    this.replyingTo = this.comment.user.username;
   }
 }

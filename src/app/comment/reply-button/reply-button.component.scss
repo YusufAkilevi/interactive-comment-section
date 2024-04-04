@@ -1,0 +1,20 @@
+@import "../../../sass/variables";
+
+.button-reply {
+  border: none;
+  background-color: $white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: $moderate-blue;
+  font-weight: $font-700;
+
+  &:hover {
+    color: $light-grayish-blue;
+    cursor: pointer;
+  }
+
+  &:hover path {
+    fill: $light-grayish-blue;
+  }
+}
