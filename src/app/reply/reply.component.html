@@ -18,7 +18,7 @@
       </svg>
     </button>
   </div>
-  <div>
+  <div class="comment-info-container">
     <div class="comment-info">
       <div class="user">
         <div class="avatar">
@@ -28,7 +28,10 @@
         <p class="date">{{ reply.createdAt }}</p>
       </div>
       <div class="button">
-        <app-reply-button *ngIf="!isCurrentUser"></app-reply-button>
+        <app-reply-button
+          (clickEvent)="onClickReply()"
+          *ngIf="!isCurrentUser"
+        ></app-reply-button>
         <app-edit-delete-buttons
           *ngIf="isCurrentUser"
         ></app-edit-delete-buttons>
@@ -39,3 +42,8 @@
     </p>
   </div>
 </div>
+<app-new-comment
+  *ngIf="showReply"
+  [replyingTo]="replyingTo"
+  (showReplyEvent)="showReply = $event"
+></app-new-comment>

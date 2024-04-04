@@ -43,7 +43,11 @@
     </p>
   </div>
 </div>
-<app-new-comment *ngIf="replyingTo" [replyingTo]="replyingTo"></app-new-comment>
+<app-new-comment
+  *ngIf="showReply"
+  [replyingTo]="replyingTo"
+  (showReplyEvent)="showReply = $event"
+></app-new-comment>
 <div *ngIf="comment.replies.length > 0" class="reply-box">
   <div class="v-line"></div>
   <div class="replies">

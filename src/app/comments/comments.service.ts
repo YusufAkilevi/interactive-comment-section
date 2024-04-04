@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { Comment } from '../shared/comment.model';
+import { Reply } from '../shared/reply.model';
 
 @Injectable({
   providedIn: 'root',
@@ -93,7 +95,7 @@ export class CommentsService {
     username: 'juliusomo',
   };
 
-  count = 4;
+  count = 5;
 
   constructor() {}
 
@@ -101,7 +103,18 @@ export class CommentsService {
     this.comments.push(newComment);
     console.log(this.comments);
   }
-
+  addReplyToComment(newReply: Reply, replyingTo: Comment | Reply) {
+    const commentReplyingTo = this.comments.find(
+      (comment) => comment.user.username === replyingTo.user.username
+    );
+    commentReplyingTo?.replies.push(newReply);
+  }
+  addReplyToReply(newReply: Reply, replyingTo: string) {
+    const commentReplyingTo = this.comments.find((comment) =>
+      comment.replies.find((reply) => reply.user.username === replyingTo)
+    );
+    console.log(commentReplyingTo);
+  }
   voteComments(voteType: string, commentId: number) {
     if (voteType === 'up') {
       const comment = this.comments.find((comment) => comment.id === commentId);

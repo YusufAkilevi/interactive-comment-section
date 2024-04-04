@@ -14,11 +14,20 @@ export class ReplyComponent implements OnInit {
 
   currentUser: User;
   isCurrentUser: boolean;
+  showReply: boolean;
+  replyingTo: Reply;
 
   constructor(private commentsService: CommentsService) {}
 
   ngOnInit(): void {
     this.currentUser = this.commentsService.currentUser;
     this.isCurrentUser = this.currentUser.username === this.reply.user.username;
+  }
+
+  onClickReply() {
+    this.showReply = true;
+    this.replyingTo = this.reply;
+
+    console.log('reply');
   }
 }
