@@ -6,12 +6,12 @@
     <textarea
       class="comment"
       placeholder="Add a comment.."
-      [value]="replyingTo ? '@' + replyingTo.user.username : ''"
+      [value]="replyingToUser ? '@' + replyingToUser + ' ' : ''"
       rows="4"
       #commentInput
     ></textarea>
 
-    <button *ngIf="replyingTo" (click)="onSendReply()">REPLY</button>
-    <button *ngIf="!replyingTo" (click)="onSendComment()">SEND</button>
+    <button *ngIf="replyingToUser" (click)="onSendReply()">REPLY</button>
+    <button *ngIf="!replyingToUser" (click)="onSendComment()">SEND</button>
   </div>
 </div>

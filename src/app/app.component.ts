@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { CommentsService } from './comments/comments.service';
 import { Comment } from './shared/comment.model';
 @Component({

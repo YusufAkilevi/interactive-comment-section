@@ -99,35 +99,96 @@ export class CommentsService {
 
   constructor() {}
 
-  addComment(newComment: Comment) {
-    this.comments.push(newComment);
-    console.log(this.comments);
-  }
-  addReplyToComment(newReply: Reply, replyingTo: Comment | Reply) {
-    const commentReplyingTo = this.comments.find(
-      (comment) => comment.user.username === replyingTo.user.username
+  addComment(newComment: string) {
+    this.comments.push(
+      new Comment(
+        this.count + 1,
+        newComment,
+        new Date().toDateString(),
+        0,
+        this.currentUser,
+        []
+      )
     );
-    commentReplyingTo?.replies.push(newReply);
+    this.count++;
   }
-  addReplyToReply(newReply: Reply, replyingTo: string) {
-    const commentReplyingTo = this.comments.find((comment) =>
-      comment.replies.find((reply) => reply.user.username === replyingTo)
+
+  addReply(reply: string, replyingToId: number, replyingTo: string) {
+    const newReply = new Reply(
+      this.count + 1,
+      reply,
+      new Date().toDateString(),
+      0,
+      this.currentUser,
+      replyingTo
     );
-    console.log(commentReplyingTo);
-  }
-  voteComments(voteType: string, commentId: number) {
-    if (voteType === 'up') {
-      const comment = this.comments.find((comment) => comment.id === commentId);
-      if (comment) {
-        comment.score++;
+    this.count++;
+
+    for (let comment of this.comments) {
+      if (comment.id === replyingToId) {
+        comment.replies.push(newReply);
+      } else {
+        for (let reply of comment.replies) {
+          if (reply.id === replyingToId) {
+            comment.replies.push(newReply);
+          }
+        }
       }
-    } else {
-      const comment = this.comments.find((comment) => comment.id === commentId);
-      if (comment) {
-        comment.score--;
+    }
+  }
+
+  removeComment(commentId: number) {
+    for (let [index, comment] of this.comments.entries()) {
+      if (comment.id === commentId) {
+        this.comments.splice(index, 1);
+      } else {
+        for (let [idx, reply] of comment.replies.entries()) {
+          if (reply.id === commentId) {
+            comment.replies.splice(idx, 1);
+          }
+        }
+      }
+    }
+  }
+
+  voteComments(voteType: string, commentId: number) {
+    for (let comment of this.comments) {
+      if (comment.id === commentId) {
+        if (voteType === 'up') {
+          comment.score++;
+        } else {
+          comment.score--;
+        }
+      } else {
+        for (let reply of comment.replies) {
+          if (reply.id === commentId) {
+            if (voteType === 'up') {
+              reply.score++;
+            } else {
+              reply.score--;
+            }
+          }
+        }
       }
     }
 
     this.comments.sort((a: Comment, b: Comment) => b.score - a.score);
+  }
+
+  getUserReplyingTo(replyId: number) {
+    for (let comment of this.comments) {
+      if (comment.id === replyId) {
+        return comment.user.username;
+      } else if (comment.replies.length > 0) {
+        for (let reply of comment.replies) {
+          if (reply.id === replyId) {
+            return reply.user.username;
+          }
+        }
+      } else {
+        return '';
+      }
+    }
+    return '';
   }
 }

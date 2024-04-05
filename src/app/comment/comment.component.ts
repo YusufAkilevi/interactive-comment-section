@@ -13,7 +13,8 @@ export class CommentComponent implements OnInit {
 
   currentUser: User;
   isCurrentUser: boolean;
-  replyingTo!: Comment;
+  replyingTo!: number;
+  replyingToUser: string;
   showReply: boolean;
 
   constructor(private commentsService: CommentsService) {}
@@ -29,7 +30,8 @@ export class CommentComponent implements OnInit {
   }
 
   onClickReply() {
-    this.replyingTo = this.comment;
+    this.replyingTo = this.comment.id;
+    this.replyingToUser = this.comment.user.username;
     this.showReply = !this.showReply;
   }
 }

@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { CommentsService } from '../comments/comments.service';
 import { Comment, User } from '../shared/comment.model';
-import { Reply } from '../shared/reply.model';
 
 @Component({
   selector: 'app-new-comment',
@@ -20,7 +19,8 @@ export class NewCommentComponent implements OnInit {
   currentUser!: User;
   showReply: boolean;
 
-  @Input() replyingTo: Comment | Reply;
+  @Input() replyingTo: number;
+  @Input() replyingToUser: string;
   @Output() showReplyEvent = new EventEmitter<boolean>();
 
   @ViewChild('commentInput', { static: false }) commentInputRef: ElementRef;
@@ -36,31 +36,17 @@ export class NewCommentComponent implements OnInit {
   }
 
   onSendComment() {
-    this.commentsService.addComment(
-      new Comment(
-        this.commentsService.count + 1,
-        this.commentInputRef.nativeElement.value,
-        new Date().toDateString(),
-        0,
-        this.commentsService.currentUser,
-        []
-      )
-    );
+    this.commentsService.addComment(this.commentInputRef.nativeElement.value);
     this.commentInputRef.nativeElement.value = '';
   }
 
   onSendReply() {
-    this.commentsService.addReplyToComment(
-      new Reply(
-        this.commentsService.count + 1,
-        'Haloo',
-        new Date().toDateString(),
-        0,
-        this.commentsService.currentUser,
-        this.replyingTo.user.username
-      ),
-      this.replyingTo
-    );
+    const reply = this.commentInputRef.nativeElement.value
+      .split(' ')
+      .slice(1)
+      .join(' ');
+
+    this.commentsService.addReply(reply, this.replyingTo, this.replyingToUser);
     this.showReplyEvent.emit(false);
   }
 }

@@ -15,7 +15,7 @@ export class ReplyComponent implements OnInit {
   currentUser: User;
   isCurrentUser: boolean;
   showReply: boolean;
-  replyingTo: Reply;
+  replyingToUser: string;
 
   constructor(private commentsService: CommentsService) {}
 
@@ -25,9 +25,11 @@ export class ReplyComponent implements OnInit {
   }
 
   onClickReply() {
-    this.showReply = true;
-    this.replyingTo = this.reply;
+    this.showReply = !this.showReply;
+    this.replyingToUser = this.commentsService.getUserReplyingTo(this.reply.id);
+  }
 
-    console.log('reply');
+  onVote(voteType: string) {
+    this.commentsService.voteComments(voteType, this.reply.id);
   }
 }

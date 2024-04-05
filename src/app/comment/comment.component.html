@@ -34,6 +34,7 @@
           *ngIf="!isCurrentUser"
         ></app-reply-button>
         <app-edit-delete-buttons
+          [replyId]="comment.id"
           *ngIf="isCurrentUser"
         ></app-edit-delete-buttons>
       </div>
@@ -46,6 +47,7 @@
 <app-new-comment
   *ngIf="showReply"
   [replyingTo]="replyingTo"
+  [replyingToUser]="replyingToUser"
   (showReplyEvent)="showReply = $event"
 ></app-new-comment>
 <div *ngIf="comment.replies.length > 0" class="reply-box">
