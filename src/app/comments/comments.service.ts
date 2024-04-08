@@ -124,53 +124,59 @@ export class CommentsService {
     );
     this.count++;
 
-    for (let comment of this.comments) {
+    const parentComment = this.comments.find((comment) => {
       if (comment.id === replyingToId) {
-        comment.replies.push(newReply);
+        return comment;
+      } else if (comment.replies.length > 0) {
+        const isReplyingTo = comment.replies.some(
+          (reply) => reply.id === replyingToId
+        );
+
+        return isReplyingTo ? comment : false;
       } else {
-        for (let reply of comment.replies) {
-          if (reply.id === replyingToId) {
-            comment.replies.push(newReply);
-          }
-        }
+        return false;
       }
-    }
+    });
+    parentComment?.replies.push(newReply);
   }
 
   removeComment(commentId: number) {
-    for (let [index, comment] of this.comments.entries()) {
+    this.comments.find((comment, i) => {
       if (comment.id === commentId) {
-        this.comments.splice(index, 1);
+        return this.comments.splice(i, 1);
       } else {
-        for (let [idx, reply] of comment.replies.entries()) {
+        comment.replies.find((reply, i) => {
           if (reply.id === commentId) {
-            comment.replies.splice(idx, 1);
+            return comment.replies.splice(i, 1);
+          } else {
+            return false;
           }
-        }
+        });
+        return false;
       }
-    }
+    });
   }
 
   voteComments(voteType: string, commentId: number) {
-    for (let comment of this.comments) {
-      if (comment.id === commentId) {
-        if (voteType === 'up') {
-          comment.score++;
-        } else {
-          comment.score--;
-        }
+    const vote = (voteType: string, comment: Comment | Reply | undefined) => {
+      if (voteType === 'up') {
+        if (comment) comment.score++;
       } else {
-        for (let reply of comment.replies) {
-          if (reply.id === commentId) {
-            if (voteType === 'up') {
-              reply.score++;
-            } else {
-              reply.score--;
-            }
-          }
-        }
+        if (comment) comment.score--;
       }
-    }
+    };
+
+    this.comments.find((comment) => {
+      if (comment.id === commentId) {
+        vote(voteType, comment);
+      } else {
+        comment.replies.find((reply) => {
+          if (reply.id === commentId) {
+            vote(voteType, reply);
+          }
+        });
+      }
+    });
 
     this.comments.sort((a: Comment, b: Comment) => b.score - a.score);
   }

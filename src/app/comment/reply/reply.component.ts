@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Reply } from '../shared/reply.model';
-import { User } from '../shared/comment.model';
-import { CommentsService } from '../comments/comments.service';
+import { Reply } from '../../shared/reply.model';
+import { User } from '../../shared/comment.model';
+import { CommentsService } from '../../comments/comments.service';
 
 @Component({
   selector: 'app-reply',

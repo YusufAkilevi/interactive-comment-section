@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { CommentComponent } from './comment/comment.component';
 import { NewCommentComponent } from './new-comment/new-comment.component';
-import { ReplyComponent } from './reply/reply.component';
+import { ReplyComponent } from './comment/reply/reply.component';
 import { EditDeleteButtonsComponent } from './comment/edit-delete-buttons/edit-delete-buttons.component';
 import { ReplyButtonComponent } from './comment/reply-button/reply-button.component';
 
